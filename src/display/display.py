@@ -7,9 +7,10 @@ from PyQt5 import QtWidgets
 import sys
 import os
 
-# Dopo la compilazione, trasferire:
+# COMPILAZIONE - Copiare
 # QtWebEngineProcess.exe da .\PyQt5\Qt\bin
 # tutti i file da .\PyQt5\Qt\resources
+# i file index.html e app.js e la dir assets\
 # nella ROOT con l'eseguibile
 
 class MainWindow(QMainWindow):
@@ -22,11 +23,11 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setWindowFlag(Qt.FramelessWindowHint)
 
-        if not os.path.isfile(os.path.abspath(os.getcwd())+'\\display.conf'):
+        if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\display.conf'):
             print("CREARE UN FILE display.conf NELLA DIRECTORY "+sys.path[0])
             input()
             exit()
-        with open(os.path.abspath(os.getcwd())+"\\display.conf", "r") as config:
+        with open(os.path.abspath(os.path.dirname(sys.argv[0]))+"\\display.conf", "r") as config:
             file_data = config.readlines()
             print(file_data[1].split("=")[-1])
             if ("no" in file_data[1].split("=")[-1]):
@@ -52,7 +53,7 @@ class MainWindow(QMainWindow):
 
         self.browser.page().setZoomFactor(0.5)
 
-        self.browser.setUrl(QUrl.fromLocalFile(os.path.abspath(os.getcwd())+"\\index.html"))
+        self.browser.setUrl(QUrl.fromLocalFile(os.path.abspath(os.path.dirname(sys.argv[0]))+"\\index.html"))
 
         self.setCentralWidget(self.browser)
 

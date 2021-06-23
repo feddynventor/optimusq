@@ -18,11 +18,11 @@ hostname = "127.0.0.1"
 port = "7000"
 size = "200x500"
 
-if not os.path.isfile(os.path.abspath(os.getcwd())+'\\cassa.conf'):
+if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.conf'):
     print("CREARE UN FILE cassa.conf NELLA DIRECTORY "+sys.path[0])
     input()
     exit()
-with open(os.path.abspath(os.getcwd())+'\\cassa.conf', 'r') as ff:
+with open(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.conf', 'r') as ff:
     data = ff.readlines()
     numero = data[0].split("=")[-1].rstrip("\n\r")
     hostname = data[1].split("=")[-1].rstrip("\n\r")
@@ -76,11 +76,12 @@ def window():
 
 
 import websocket
+import time
+
 try:
     import thread
 except ImportError:
     import _thread as thread
-import time
 
 def on_message(ws, message):
     print(message)
@@ -136,7 +137,7 @@ def ws_busy():
 
 import threading
 if __name__ == '__main__':
-    global ws, t1, t2
+    # global ws, t1, t2
     websocket.enableTrace(True)
     ws = websocket.WebSocketApp("ws://"+str(hostname)+":"+port+"/",
                               on_open = on_open,

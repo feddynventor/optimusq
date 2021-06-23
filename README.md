@@ -8,8 +8,22 @@
 Realizzato con versione 3.9.2
 * PyQt5
 * PyQtWebEngine
+* websocket-client
 ## **Librerie NodeJS**
 [Base SocketServer](https://github.com/codealchemist/websocket-broadcast)
 Realizzato con versione 14
 
 Eseguire il comando nella directory del sorgente: `npm install`
+
+# Build
+## **Javascript**
+### Libreria 
+`npm install --global nexe`
+### Comando
+`nexe .\server.js -t x86-8.0.0`
+## **Python**
+### Libreria
+`pip install pyinstaller`
+### Comando
+`pyinstaller.exe .\display.py`
+`pyinstaller.exe .\cassa.py`

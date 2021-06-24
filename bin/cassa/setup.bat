@@ -1,3 +1,10 @@
+@echo off
+pushd %~dp0
+
+echo Installando Python
+python-3.9.2.exe /quiet InstallAllUsers=1 PrependPath=1
+echo Installando Librerie
+pip install PyQt5==5.15.4 PyQtWebEngine==5.15.4
 
 mkdir %appdata%\EliminaCodeCassa
 copy * %appdata%\EliminaCodeCassa\*

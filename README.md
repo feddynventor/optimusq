@@ -5,7 +5,9 @@
 * Client Display: è un programma Python che esegue un Browser basato su Chromium in modalità Kiosk. Il browser implementa Javascript e ha il consenso alla riproduzione di audio.
 
 ## **Python**
-Realizzato con versione 3.9.2
+*Versione: 3.6.8*
+
+`pip install pyqt5 pyqtwebengine websocket-client`
 * PyQt5
 * PyQtWebEngine
 * websocket-client

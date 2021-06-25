@@ -40,7 +40,7 @@ req.end()
 
 // CONfIGURAZIONI
   try {
-    let readData = fs.readFileSync(process.cwd()+"/server.conf", 'utf8');
+    let readData = fs.readFileSync(__dirname+"/server.conf", 'utf8');
     readData = JSON.parse(readData)
     port = readData.port
     max_queue_per_cassa = readData.max_queue_per_cassa

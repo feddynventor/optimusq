@@ -1,0 +1,4 @@
+bin/display/debug.log
+.vscode
+src\display\__pycache__
+src\cassa\__pycache__

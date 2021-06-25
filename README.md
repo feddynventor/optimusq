@@ -17,6 +17,13 @@ Realizzato con versione 14
 
 Eseguire il comando nella directory del sorgente: `npm install`
 
+## Personalizzazione
+I parametri del software vengono personalizzati tramite i file .conf di ogni componente
+
+I config dei software Cassa e Display vengono letti riga per riga dal software Python pertanto non sono ammesse variazioni di sintassi.
+
+NOTA: Durante lo sviluppo è importante fare `push` nel repository salvando i file con gestione del ritorno a capo di Windows tramite il comando: `git config --global core.autocrlf false`
+
 # Build
 ## **Javascript**
 ### Libreria 

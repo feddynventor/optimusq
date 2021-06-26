@@ -7,12 +7,6 @@ from PyQt5 import QtWidgets
 import sys
 import os
 
-# COMPILAZIONE - Copiare
-# QtWebEngineProcess.exe da .\PyQt5\Qt\bin
-# tutti i file da .\PyQt5\Qt\resources
-# i file index.html e app.js e la dir assets\
-# nella ROOT con l'eseguibile
-
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):

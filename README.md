@@ -5,7 +5,7 @@
 * Client Display: è un programma Python che esegue un Browser basato su Chromium in modalità Kiosk. Il browser implementa Javascript e ha il consenso alla riproduzione di audio.
 
 # Personalizzazione
-I parametri del software vengono personalizzati tramite i file .conf di ogni componente
+I parametri del software vengono personalizzati tramite i file .txt di ogni componente
 
 I config dei software Cassa e Display vengono letti riga per riga dal software Python pertanto non sono ammesse variazioni di sintassi.
 
@@ -15,7 +15,7 @@ I config dei software Cassa e Display vengono letti riga per riga dal software P
 
 
 ## Display
-### Config: `%appdata%\EliminaCodeDisplay\display.conf`
+### Config: `%appdata%\EliminaCodeDisplay\display.txt`
 
 ### Layout predefiniti
 Sono implementati due layout impostabili dal parametro **layout**

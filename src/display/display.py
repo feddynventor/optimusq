@@ -17,11 +17,11 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setWindowFlag(Qt.FramelessWindowHint)
 
-        if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\display.conf'):
-            print("CREARE UN FILE display.conf NELLA DIRECTORY "+sys.path[0])
+        if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\display.txt'):
+            print("CREARE UN FILE display.txt NELLA DIRECTORY "+sys.path[0])
             input()
             exit()
-        with open(os.path.abspath(os.path.dirname(sys.argv[0]))+"\\display.conf", "r") as config:
+        with open(os.path.abspath(os.path.dirname(sys.argv[0]))+"\\display.txt", "r") as config:
             file_data = config.readlines()
             print(file_data[1].split("=")[-1])
             if ("no" in file_data[1].split("=")[-1]):

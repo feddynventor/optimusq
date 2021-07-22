@@ -18,11 +18,11 @@ hostname = "127.0.0.1"
 port = "7000"
 size = "200x500"
 
-if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.conf'):
-    print("CREARE UN FILE cassa.conf NELLA DIRECTORY "+sys.path[0])
+if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.txt'):
+    print("CREARE UN FILE cassa.txt NELLA DIRECTORY "+sys.path[0])
     input()
     exit()
-with open(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.conf', 'r') as ff:
+with open(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.txt', 'r') as ff:
     data = ff.readlines()
     numero = data[0].split("=")[-1].rstrip("\n\r")
     hostname = data[1].split("=")[-1].rstrip("\n\r")

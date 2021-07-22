@@ -18,6 +18,6 @@ del CreateShortcut.vbs
 
 echo INSTALLAZIONE COMPLETATA. PREMERE INVIO PER APRIRE IL FILE DI CONFIGURAZIONE.
 pause
-notepad.exe %appdata%\EliminaCodeServer\server.conf
+notepad.exe %appdata%\EliminaCodeServer\server.txt
 
 @REM "%appdata%\EliminaCodeServer\server.exe"

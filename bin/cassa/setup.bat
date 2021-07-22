@@ -18,6 +18,6 @@ del CreateShortcut.vbs
 
 echo INSTALLAZIONE COMPLETATA. PREMERE INVIO PER APRIRE IL FILE DI CONFIGURAZIONE.
 pause
-notepad.exe %appdata%\EliminaCodeCassa\cassa.conf
+notepad.exe %appdata%\EliminaCodeCassa\cassa.txt
 
 @REM "%appdata%\EliminaCodeCassa\cassa.exe"

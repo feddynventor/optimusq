@@ -18,6 +18,6 @@ del CreateShortcut.vbs
 
 echo INSTALLAZIONE COMPLETATA. PREMERE INVIO PER APRIRE IL FILE DI CONFIGURAZIONE.
 pause
-notepad.exe %appdata%\EliminaCodeDisplay\display.conf
+notepad.exe %appdata%\EliminaCodeDisplay\display.txt
 
 @REM "%appdata%\EliminaCodeDisplay\display.exe"

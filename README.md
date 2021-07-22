@@ -16,7 +16,14 @@ I config dei software Cassa e Display vengono letti riga per riga dal software P
 
 ## Display
 ### Config: `%appdata%\EliminaCodeDisplay\display.conf`
-#### Sezione Finestra
+
+### Layout predefiniti
+Sono implementati due layout impostabili dal parametro **layout**
+- Verticale: 1
+- Orizzontale: 2 
+È necessario modificare la dimensione della finestra manualmente
+
+### Sezione Finestra
 * `anchor_x=  destra|sinistra|no`
 	
     Porta la finestra al lato destro o sinistro dello schermo
@@ -47,6 +54,7 @@ I config dei software Cassa e Display vengono letti riga per riga dal software P
     *Esempio:* `pos=-100;-1`
 #### Sezione Grafica
 Si tratta di un insieme dati in formato JSON in cui sono elencate e descritte con commenti le opzioni grafiche della pagina. 
+
 → È possibile in **fase di installazione** posizionare un pulsante nella pagina che fa il refresh della pagina al fine di verificare rapidamente le impostazioni inserite.
 
 ## Suoni Display

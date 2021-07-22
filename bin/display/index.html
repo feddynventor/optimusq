@@ -23,9 +23,9 @@
 		  font-weight: bold;
 		  color: #000000;
 		}
-		.divTable.table .divTableCell:nth-child(even) {
+		/* .divTable.table .divTableCell:nth-child(even) {
 		  background: #398AA4;
-		}
+		} */
 		.divTable.table .divTableHeading {
 		  background: #398AA4;
 		  /*border-bottom: 10px solid #398AA4;*/
@@ -59,13 +59,7 @@
 
 	<button id="testbutton" style="display: none; width: 100%; height: 10%;" onclick="window.location.reload()">REFRESH</button>
 
-    <div class="divTable table">
-		<div class="divTableHeading">
-			<div class="divTableRow">
-				<div class="divTableHead">Cassa</div>
-				<div class="divTableHead">Serviamo il</div>
-			</div>
-		</div>
+    <div class="divTable table" id="root">
 		<div id="listaCasse" class="divTableBody">
 			
 		</div>

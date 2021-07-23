@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", function(){
         tableRow.setAttribute("class","divTableRow")
         let cell1 = document.createElement("div")
         cell1.setAttribute("class","divTableHead")
-        cell1.innerHTML = "Cassa"
+        cell1.innerHTML = conf.testo.tabella.titolo_cassa
         let cell2 = document.createElement("div")
         cell2.setAttribute("class","divTableHead")
-        cell2.innerHTML = "Serviamo il"
+        cell2.innerHTML = conf.testo.tabella.titolo_numero
 
         tableRow.appendChild(cell1)
         tableRow.appendChild(cell2)
@@ -135,7 +135,7 @@ ws.onmessage = function (event) {
             let numCassa = document.createElement("div")
             numCassa.setAttribute("class","divTableCell")
             numCassa.setAttribute("style","font-size: "+conf.dimensioni_testo.cassa+"; color:"+conf.colore.cassa)
-            numCassa.innerHTML = dat.cassa
+            numCassa.innerHTML = conf.testo.tabella.cassa+dat.cassa
 
             let numero = document.createElement("div")
             numero.setAttribute("class","divTableCell")
@@ -144,7 +144,7 @@ ws.onmessage = function (event) {
             let numeroText = document.createElement("div")
             numeroText.setAttribute("id","Ncassa"+dat.cassa)
             numeroText.setAttribute("style","background-color: "+conf.colore.primario+"; border-radius: "+conf.raggioRettangoloNumero+"px;")
-            numeroText.innerHTML = (dat.numero!=undefined)?dat.numero:""
+            numeroText.innerHTML = (dat.numero!=undefined)?(conf.testo.tabella.numero+dat.numero):""
             numero.appendChild(numeroText)
 
             row.appendChild(numCassa)
@@ -178,12 +178,12 @@ ws.onmessage = function (event) {
             //console.log(dat)
             let numCassa = document.createElement("p")
             numCassa.setAttribute("style","font-size: "+conf.dimensioni_testo.cassa+"; color:"+conf.colore.cassa+"; margin: 2vh")
-            numCassa.innerHTML = dat.cassa
+            numCassa.innerHTML = conf.testo.box.cassa+dat.cassa
 
             let numero = document.createElement("p")
             numero.setAttribute("style","font-size: "+conf.dimensioni_testo.numero+"; color:"+conf.colore.numero+"; background-color: "+conf.colore.primario+"; border-radius: "+conf.raggioRettangoloNumero+"px; margin: 2vh")
             numero.setAttribute("id","Ncassa"+dat.cassa)
-            numero.innerHTML = (dat.numero!=undefined)?dat.numero:""
+            numero.innerHTML = (dat.numero!=undefined)?(conf.testo.box.numero+dat.numero):""
 
             container.appendChild(numCassa)
             // container.appendChild(document.createElement("br"))

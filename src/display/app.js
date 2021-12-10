@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
     style.innerHTML += ".divTable.table .divTableHeading .divTableHead {font-size: "+conf.dimensioni_testo.titoli+"}"
     document.head.appendChild(style);
 
-    if (conf.testgraphics)
+    if (conf.refresh_css_button)
         document.getElementById("testbutton").style.display = "block";
 
     if (conf.layout == 2){
@@ -100,6 +100,12 @@ ws.onmessage = function (event) {
     }
     console.log(data);
 
+    if (conf.solo_ultimo){
+        if (data.mute==1 && data.stop!=1)
+            return
+        list = data.list.filter(obj => obj.cassa === data.new)
+    }
+
     if (data.stop != undefined){  
         // arriva quando per es il numero è stato mandato indietro, per evitare confusione
         nomeCassa.pause()
@@ -143,7 +149,7 @@ ws.onmessage = function (event) {
             // numero.setAttribute("id","Ncassa"+dat.cassa)
             let numeroText = document.createElement("div")
             numeroText.setAttribute("id","Ncassa"+dat.cassa)
-            numeroText.setAttribute("style","background-color: "+conf.colore.primario+"; border-radius: "+conf.raggioRettangoloNumero+"px;")
+            numeroText.setAttribute("style","background-color: "+conf.colore.primario+"; border-radius: "+conf.raggio_rettangolo_numero+"px;")
             numeroText.innerHTML = (dat.numero!=undefined)?(conf.testo.tabella.numero+dat.numero):""
             numero.appendChild(numeroText)
 
@@ -181,12 +187,13 @@ ws.onmessage = function (event) {
             numCassa.innerHTML = conf.testo.box.cassa+dat.cassa
 
             let numero = document.createElement("p")
-            numero.setAttribute("style","font-size: "+conf.dimensioni_testo.numero+"; color:"+conf.colore.numero+"; background-color: "+conf.colore.primario+"; border-radius: "+conf.raggioRettangoloNumero+"px; margin: 2vh")
+            numero.setAttribute("style","font-size: "+conf.dimensioni_testo.numero+"; color:"+conf.colore.numero+"; background-color: "+conf.colore.primario+"; border-radius: "+conf.raggio_rettangolo_numero+"px; margin: 2vh")
             numero.setAttribute("id","Ncassa"+dat.cassa)
-            numero.innerHTML = (dat.numero!=undefined)?(conf.testo.box.numero+dat.numero):""
+            numero.innerHTML = (dat.numero!=undefined)?(((conf.solo_sigla_numero)?dat.cassa.toUpperCase().charAt(0):conf.testo.box.numero)+((dat.numero<10)?'0'+dat.numero:dat.numero)):""
 
-            container.appendChild(numCassa)
-            // container.appendChild(document.createElement("br"))
+            if (!conf.solo_sigla_numero)
+                container.appendChild(numCassa)
+
             container.appendChild(numero)
             
             document.getElementById("tableSingleRow").appendChild(container);
@@ -209,6 +216,7 @@ ws.onmessage = function (event) {
 
         if (conf.lampeggia){
             let timesRun = 0;
+            //console.log(data.new)
             var interval = setInterval(function(){
                 timesRun += 1;
                 if(timesRun > parseInt((conf.tempo_lampeggio*1000)/120)){

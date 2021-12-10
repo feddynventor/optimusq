@@ -187,7 +187,8 @@ wss.on('connection', (ws, req) => {
 	if (input.dir==1)
 		message = JSON.stringify( {new:input.cassa, list:casse} )  //comunica aggiornamento
 	else if (input.dir==-1)
-		message = JSON.stringify( {new:-1, list:casse, mute:1, stop:1} )  
+		//message = JSON.stringify( {new:-1, list:casse, mute:1, stop:1} )  
+		message = JSON.stringify( {new:input.cassa, list:casse, mute:1, stop:1} )  
     //non fare suoni e lampeggii sul display, 'stop' ferma tutti gli audio in play
 
   //console.log(JSON.parse(message))

@@ -1,6 +1,6 @@
 import sys
 import os
-# from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QPushButton
+# from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPalette, QGridLayout, QPushButton
 # from PyQt5.QtWidgets import *
 # from PyQt5.QtGui import QIcon
 # from PyQt5.QtCore import pyqtSlot
@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 from PyQt5 import QtWidgets
-
+import keyboard
 
 global ws, t1, t2   #thread e websocket
 numero = "-1"
@@ -17,6 +17,7 @@ busy = False
 hostname = "127.0.0.1"
 port = "7000"
 size = "200x500"
+minimized = False
 
 if not os.path.isfile(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.conf'):
     print("CREARE UN FILE cassa.conf NELLA DIRECTORY "+sys.path[0])
@@ -29,6 +30,7 @@ with open(os.path.abspath(os.path.dirname(sys.argv[0]))+'\\cassa.conf', 'r') as 
     size = data[2].split("=")[-1].rstrip("\n\r")
     position = data[3].split("=")[-1].rstrip("\n\r")
     port = data[4].split("=")[-1].rstrip("\n\r")
+    minimized = (data[5].split("=")[-1].rstrip("\n\r")=="1")
 
 
 def window():
@@ -36,9 +38,19 @@ def window():
     app = QApplication(sys.argv)
     grid = QGridLayout()
 
+    global msgbox
+    msgbox = QMessageBox()
+    msgbox.setIcon(QMessageBox.Critical)
+    msgbox.setText("Errore")
+    msgbox.setInformativeText('Errore di comunicazione con il nodo master. Può essere necessario un riavvio.')
+    msgbox.setWindowTitle("Errore")
+
     win = QWidget()
     win.setWindowFlags(Qt.WindowStaysOnTopHint)
     win.setWindowFlag(Qt.FramelessWindowHint)
+    
+    if minimized:
+        win.showMinimized()
 
     pos_x = int(position.split(";")[0])
     pos_y = int(position.split(";")[1])
@@ -50,6 +62,11 @@ def window():
 
     grid.setContentsMargins(0,0,0,0)
 
+    label1 = QLabel("")
+    label1.setText("Cassa "+numero)
+    label1.setAlignment(Qt.AlignCenter)
+    grid.addWidget(label1,2,1,1,2)
+    
     nextBtn = QPushButton("AVANTI")
     nextBtn.setFixedHeight(int(size.split("x")[1])*3/5)
     nextBtn.setStyleSheet("QPushButton {background-color: #EEEEF2; font-size: 20px}")
@@ -58,12 +75,12 @@ def window():
     prevBtn = QPushButton("INDIETRO")
     prevBtn.setFixedHeight(int(size.split("x")[1])*1/5)
     prevBtn.setStyleSheet('QPushButton {background-color: #EEEEF2}')
-    grid.addWidget(prevBtn,2,1)
+    grid.addWidget(prevBtn,3,1)
 
     closeBtn = QPushButton("CHIUDI")
     closeBtn.setFixedHeight(int(size.split("x")[1])*1/5)
     closeBtn.setStyleSheet('QPushButton {background-color: #EEEEF2}')
-    grid.addWidget(closeBtn,2,2)
+    grid.addWidget(closeBtn,3,2)
 
     nextBtn.clicked.connect(ws_next)
     closeBtn.clicked.connect(ws_busy) 
@@ -90,9 +107,11 @@ def on_error(wss, error):
     print(error)
     global nextBtn
     nextBtn.setText("ERRORE SISTEMA!")
+    msgbox.exec_()
 
-def on_close():
+def on_close(a,b,c):
     print("### closed ###")
+    msgbox.exec_()
 
 def on_open(ws):
     ws.send("{\"cassa\":\"%s\", \"busy\":false}" % numero)
@@ -100,6 +119,7 @@ def on_open(ws):
 def ws_next():
     ws.send("{\"cassa\":\"%s\",\"dir\":1}" % numero)
     threading.Thread(target=lamp).start()
+keyboard.add_hotkey("f12",ws_next)
 
 def lamp():
     global nextBtn
@@ -113,11 +133,12 @@ def lamp():
         status = not status
         time.sleep(0.1)
     nextBtn.setStyleSheet('QPushButton {background-color: #EEEE5F; font-size: 20px}')
-    exit()
+    sys.exit()
     
 def ws_prev():
     global ws
     ws.send("{\"cassa\":\"%s\",\"dir\":-1}" % numero)
+keyboard.add_hotkey("f9",ws_prev)
 
 def ws_busy():
     global closeBtn, nextBtn, prevBtn
